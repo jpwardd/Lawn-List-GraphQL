@@ -1,4 +1,4 @@
-JobListSchema = GraphQL::Schema.define do
+LawnTrackerSchema = GraphQL::Schema.define do
   mutation(Types::MutationType)
   query(Types::QueryType)
 end
