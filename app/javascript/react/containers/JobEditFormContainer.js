@@ -27,27 +27,27 @@ class JobEditFormContainer extends Component {
     this.handleEmployeeSelectChange = this.handleEmployeeSelectChange.bind(this);
   }
 
-  componentDidMount() {
-    fetch("/api/v1/employees", {
-      credentials: "same-origin"
-    })
-      .then(response => {
-        if (response.ok) {
-          return response;
-        } else {
-          let errorMessage = `${response.status} (${response.statusText})`,
-            error = new Error(errorMessage);
-          throw error;
-        }
-      })
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        this.setState({ employees: data });
-      })
-      .catch(error => console.error(`Error in fetch: ${error.message}`));
-  }
+  // componentDidMount() {
+  //   fetch("/api/v1/employees", {
+  //     credentials: "same-origin"
+  //   })
+  //     .then(response => {
+  //       if (response.ok) {
+  //         return response;
+  //       } else {
+  //         let errorMessage = `${response.status} (${response.statusText})`,
+  //           error = new Error(errorMessage);
+  //         throw error;
+  //       }
+  //     })
+  //     .then(response => {
+  //       return response.json();
+  //     })
+  //     .then(data => {
+  //       this.setState({ employees: data });
+  //     })
+  //     .catch(error => console.error(`Error in fetch: ${error.message}`));
+  // }
 
   handleSubmit(event) {
     event.preventDefault();

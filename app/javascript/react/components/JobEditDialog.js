@@ -18,25 +18,25 @@ export default class JobFormDialog extends React.Component {
     };
   }
 
-  componentDidMount() {
-    fetch("/api/v1/customers.json")
-      .then(response => {
-        if (response.ok) {
-          return response;
-        } else {
-          let errorMessage = `${response.status} (${response.statusText})`,
-            error = new Error(errorMessage);
-          throw error;
-        }
-      })
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        this.setState({ customers: data });
-      })
-      .catch(error => console.error(`Error in fetch: ${error.message}`));
-  }
+  // componentDidMount() {
+  //   fetch("/api/v1/customers.json")
+  //     .then(response => {
+  //       if (response.ok) {
+  //         return response;
+  //       } else {
+  //         let errorMessage = `${response.status} (${response.statusText})`,
+  //           error = new Error(errorMessage);
+  //         throw error;
+  //       }
+  //     })
+  //     .then(response => {
+  //       return response.json();
+  //     })
+  //     .then(data => {
+  //       this.setState({ customers: data });
+  //     })
+  //     .catch(error => console.error(`Error in fetch: ${error.message}`));
+  // }
 
   handleClickOpen = () => {
     this.setState({ open: true });

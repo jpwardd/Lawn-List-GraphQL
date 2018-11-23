@@ -32,129 +32,129 @@ export default class CustomersContainer extends Component {
     this.state = {
       customers: []
     }
-    this.addNewCustomer = this.addNewCustomer.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
-    this.deleteCustomerHandler = this.deleteCustomerHandler.bind(this);
-    this.editCustomerHandler = this.editCustomerHandler.bind(this);
+    // this.addNewCustomer = this.addNewCustomer.bind(this);
+    // this.handleDelete = this.handleDelete.bind(this);
+    // this.deleteCustomerHandler = this.deleteCustomerHandler.bind(this);
+    // this.editCustomerHandler = this.editCustomerHandler.bind(this);
   }
 
-  componentDidMount() {
-    fetch("/api/v1/customers",
-		{
-			credentials: 'same-origin',
-    })
-      .then(response => {
-        if (response.ok) {
-          return response;
-        } else {
-          let errorMessage = `${response.status} (${response.statusText})`,
-            error = new Error(errorMessage);
-          throw error;
-        }
-      })
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        this.setState({ customers: data });
-      })
-      .catch(error => console.error(`Error in fetch: ${error.message}`));
-  }
+  // componentDidMount() {
+  //   fetch("/api/v1/customers",
+	// 	{
+	// 		credentials: 'same-origin',
+  //   })
+  //     .then(response => {
+  //       if (response.ok) {
+  //         return response;
+  //       } else {
+  //         let errorMessage = `${response.status} (${response.statusText})`,
+  //           error = new Error(errorMessage);
+  //         throw error;
+  //       }
+  //     })
+  //     .then(response => {
+  //       return response.json();
+  //     })
+  //     .then(data => {
+  //       this.setState({ customers: data });
+  //     })
+  //     .catch(error => console.error(`Error in fetch: ${error.message}`));
+  // }
 
-  addNewCustomer(formPayload) {
-    fetch(`/api/v1/customers`, {
-      method: "post",
-      body: JSON.stringify(formPayload),
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      credentials: "same-origin"
-    })
-      .then(response => {
-        if (response.ok) {
-          return response;
-        } else {
-          let errorMessage = `${response.status} (${response.statusText})`,
-            error = new Error(errorMessage);
-          throw error;
-        }
-      })
+  // addNewCustomer(formPayload) {
+  //   fetch(`/api/v1/customers`, {
+  //     method: "post",
+  //     body: JSON.stringify(formPayload),
+  //     headers: {
+  //       Accept: "application/json",
+  //       "Content-Type": "application/json"
+  //     },
+  //     credentials: "same-origin"
+  //   })
+  //     .then(response => {
+  //       if (response.ok) {
+  //         return response;
+  //       } else {
+  //         let errorMessage = `${response.status} (${response.statusText})`,
+  //           error = new Error(errorMessage);
+  //         throw error;
+  //       }
+  //     })
   
-      .then(response => response.json())
-      .then(body => {
-        let newCustomers = this.state.customers.concat(body)
-        this.setState({ customers: newCustomers });
-      })
-      .catch(error => console.error(`Error in fetch: ${error.message}`));
-  }
+  //     .then(response => response.json())
+  //     .then(body => {
+  //       let newCustomers = this.state.customers.concat(body)
+  //       this.setState({ customers: newCustomers });
+  //     })
+  //     .catch(error => console.error(`Error in fetch: ${error.message}`));
+  // }
 
-  handleDelete(id){
-		fetch(`/api/v1/customers/${id}`,
-		{
-			method: 'DELETE',
-			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json' } ,
-			credentials: 'same-origin'
-		})
-		.then(response => {
-			if (response.ok) {
-        this.deleteCustomerHandler(id)
-			}
-			else {
-				let errorMessage = `${response.status} (${response.statusText})`,
-					error = new Error(errorMessage)
-				throw error
-			}
-		})
-		.catch(error => {
-			console.error(`ERROR IN FETCH: ${error}`)
-		})
-  }
+  // handleDelete(id){
+	// 	fetch(`/api/v1/customers/${id}`,
+	// 	{
+	// 		method: 'DELETE',
+	// 		headers: {
+	// 			'Accept': 'application/json',
+	// 			'Content-Type': 'application/json' } ,
+	// 		credentials: 'same-origin'
+	// 	})
+	// 	.then(response => {
+	// 		if (response.ok) {
+  //       this.deleteCustomerHandler(id)
+	// 		}
+	// 		else {
+	// 			let errorMessage = `${response.status} (${response.statusText})`,
+	// 				error = new Error(errorMessage)
+	// 			throw error
+	// 		}
+	// 	})
+	// 	.catch(error => {
+	// 		console.error(`ERROR IN FETCH: ${error}`)
+	// 	})
+  // }
   
-  deleteCustomerHandler(id){
-    let updatedCustomerList = this.state.customers.filter((customer) => customer.id !== id)
-    this.setState({
-      customers: updatedCustomerList
-    })
-  }
+  // deleteCustomerHandler(id){
+  //   let updatedCustomerList = this.state.customers.filter((customer) => customer.id !== id)
+  //   this.setState({
+  //     customers: updatedCustomerList
+  //   })
+  // }
 
 
-  editCustomerHandler(formPayload) {
-      fetch(`/api/v1/customers/${formPayload.id}`, {
-        method: "PATCH",
-        body: JSON.stringify(formPayload),
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        credentials: "same-origin"
-      })
-        .then(response => {
-          if (response.ok) {
-            return response;
-          } else {
-            let errorMessage = `${response.status} (${response.statusText})`,
-              error = new Error(errorMessage);
-            throw error;
-          }
-        })
-        .then(response => response.json())
-        .then(body => {
-          let findCustomer = customer => {
-            return customer.id === formPayload.id;            
-          }
-          let customerIndex = this.state.customers.findIndex(findCustomer)
-          let newCustomers = this.state.customers
-          newCustomers.splice(customerIndex, 1, body)
+  // editCustomerHandler(formPayload) {
+  //     fetch(`/api/v1/customers/${formPayload.id}`, {
+  //       method: "PATCH",
+  //       body: JSON.stringify(formPayload),
+  //       headers: {
+  //         Accept: "application/json",
+  //         "Content-Type": "application/json"
+  //       },
+  //       credentials: "same-origin"
+  //     })
+  //       .then(response => {
+  //         if (response.ok) {
+  //           return response;
+  //         } else {
+  //           let errorMessage = `${response.status} (${response.statusText})`,
+  //             error = new Error(errorMessage);
+  //           throw error;
+  //         }
+  //       })
+  //       .then(response => response.json())
+  //       .then(body => {
+  //         let findCustomer = customer => {
+  //           return customer.id === formPayload.id;            
+  //         }
+  //         let customerIndex = this.state.customers.findIndex(findCustomer)
+  //         let newCustomers = this.state.customers
+  //         newCustomers.splice(customerIndex, 1, body)
       
-         this.setState({ customers: newCustomers })
-        })
-        .catch(error =>
-          console.error(`Error in fetch: ${error.message}`)
-        );
-    }
+  //        this.setState({ customers: newCustomers })
+  //       })
+  //       .catch(error =>
+  //         console.error(`Error in fetch: ${error.message}`)
+  //       );
+  //   }
 
   showFullCustomerHandler(id) {
     if (id === this.state.customerId) {

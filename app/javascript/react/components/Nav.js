@@ -35,32 +35,32 @@ class Nav extends React.Component {
     this.state = {
       currentUser: {}
     }
-    this.userSignOut = this.userSignOut.bind(this)
+    // this.userSignOut = this.userSignOut.bind(this)
   }
 
-  componentDidMount() {
-    fetch("/api/v1/users", {
-      credentials: "same-origin"
-    })
-      .then(response => {
-        if (response.ok) {
-          return response;
-        } else {
-          let errorMessage = `${response.status} (${response.statusText})`,
-            error = new Error(errorMessage);
-          throw error;
-        }
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data) {
-          this.setState({ currentUser: data });
-        } else {
-          this.setState({ currentUser: null });
-        }
-      })
-      .catch(error => console.error(`Error in fetch: ${error.message}`));
-  }
+  // componentDidMount() {
+  //   fetch("/api/v1/users", {
+  //     credentials: "same-origin"
+  //   })
+  //     .then(response => {
+  //       if (response.ok) {
+  //         return response;
+  //       } else {
+  //         let errorMessage = `${response.status} (${response.statusText})`,
+  //           error = new Error(errorMessage);
+  //         throw error;
+  //       }
+  //     })
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       if (data) {
+  //         this.setState({ currentUser: data });
+  //       } else {
+  //         this.setState({ currentUser: null });
+  //       }
+  //     })
+  //     .catch(error => console.error(`Error in fetch: ${error.message}`));
+  // }
 
   userSignOut(event) {
     fetch("/users/sign_out", {

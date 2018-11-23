@@ -31,87 +31,87 @@ export default class EmployeesContainer extends Component {
     this.state = {
       employees: []
     };
-    this.addNewEmployee = this.addNewEmployee.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
+    // this.addNewEmployee = this.addNewEmployee.bind(this);
+    // this.handleDelete = this.handleDelete.bind(this);
     this.deleteEmployeeHandler = this.deleteEmployeeHandler.bind(this);
-    this.editEmployeeHandler = this.editEmployeeHandler.bind(this);
+    // this.editEmployeeHandler = this.editEmployeeHandler.bind(this);
     this.showFullEmployeeHandler = this.showFullEmployeeHandler.bind(this);
   }
 
-  componentDidMount() {
-    fetch("/api/v1/employees", {
-      credentials: "same-origin"
-    })
-      .then(response => {
-        if (response.ok) {
-          return response;
-        } else {
-          let errorMessage = `${response.status} (${response.statusText})`,
-            error = new Error(errorMessage);
-          throw error;
-        }
-      })
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        this.setState({ employees: data });
-      })
-      .catch(error => console.error(`Error in fetch: ${error.message}`));
-  }
+  // componentDidMount() {
+  //   fetch("/api/v1/employees", {
+  //     credentials: "same-origin"
+  //   })
+  //     .then(response => {
+  //       if (response.ok) {
+  //         return response;
+  //       } else {
+  //         let errorMessage = `${response.status} (${response.statusText})`,
+  //           error = new Error(errorMessage);
+  //         throw error;
+  //       }
+  //     })
+  //     .then(response => {
+  //       return response.json();
+  //     })
+  //     .then(data => {
+  //       this.setState({ employees: data });
+  //     })
+  //     .catch(error => console.error(`Error in fetch: ${error.message}`));
+  // }
 
 
 
-  addNewEmployee(formPayload) {
-    fetch(`/api/v1/employees`, {
-      method: "post",
-      body: JSON.stringify(formPayload),
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      credentials: "same-origin"
-    })
-      .then(response => {
-        if (response.ok) {
-          return response;
-        } else {
-          let errorMessage = `${response.status} (${response.statusText})`,
-            error = new Error(errorMessage);
-          throw error;
-        }
-      })
+  // addNewEmployee(formPayload) {
+  //   fetch(`/api/v1/employees`, {
+  //     method: "post",
+  //     body: JSON.stringify(formPayload),
+  //     headers: {
+  //       Accept: "application/json",
+  //       "Content-Type": "application/json"
+  //     },
+  //     credentials: "same-origin"
+  //   })
+  //     .then(response => {
+  //       if (response.ok) {
+  //         return response;
+  //       } else {
+  //         let errorMessage = `${response.status} (${response.statusText})`,
+  //           error = new Error(errorMessage);
+  //         throw error;
+  //       }
+  //     })
 
-      .then(response => response.json())
-      .then(body => {
-        let newCustomers = this.state.employees.concat(body);
-        this.setState({ employees: newCustomers });
-      })
-      .catch(error => console.error(`Error in fetch: ${error.message}`));
-  }
+  //     .then(response => response.json())
+  //     .then(body => {
+  //       let newCustomers = this.state.employees.concat(body);
+  //       this.setState({ employees: newCustomers });
+  //     })
+  //     .catch(error => console.error(`Error in fetch: ${error.message}`));
+  // }
 
-  handleDelete(id) {
-    fetch(`/api/v1/employees/${id}`, {
-      method: "DELETE",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      credentials: "same-origin"
-    })
-      .then(response => {
-        if (response.ok) {
-          this.deleteEmployeeHandler(id);
-        } else {
-          let errorMessage = `${response.status} (${response.statusText})`,
-            error = new Error(errorMessage);
-          throw error;
-        }
-      })
-      .catch(error => {
-        console.error(`ERROR IN FETCH: ${error}`);
-      });
-  }
+  // handleDelete(id) {
+  //   fetch(`/api/v1/employees/${id}`, {
+  //     method: "DELETE",
+  //     headers: {
+  //       Accept: "application/json",
+  //       "Content-Type": "application/json"
+  //     },
+  //     credentials: "same-origin"
+  //   })
+  //     .then(response => {
+  //       if (response.ok) {
+  //         this.deleteEmployeeHandler(id);
+  //       } else {
+  //         let errorMessage = `${response.status} (${response.statusText})`,
+  //           error = new Error(errorMessage);
+  //         throw error;
+  //       }
+  //     })
+  //     .catch(error => {
+  //       console.error(`ERROR IN FETCH: ${error}`);
+  //     });
+  // }
 
   deleteEmployeeHandler(id) {
     let updatedEmployeeList = this.state.employees.filter(
@@ -122,38 +122,38 @@ export default class EmployeesContainer extends Component {
     });
   }
 
-  editEmployeeHandler(formPayload) {
-    fetch(`/api/v1/employees/${formPayload.id}`, {
-      method: "PATCH",
-      body: JSON.stringify(formPayload),
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      credentials: "same-origin"
-    })
-      .then(response => {
-        if (response.ok) {
-          return response;
-        } else {
-          let errorMessage = `${response.status} (${response.statusText})`,
-            error = new Error(errorMessage);
-          throw error;
-        }
-      })
-      .then(response => response.json())
-      .then(body => {
-        let findEmployee = employee => {
-          return employee.id === formPayload.id;
-        };
-        let employeeIndex = this.state.employees.findIndex(findEmployee);
-        let newEmployees = this.state.employees;
-        newEmployees.splice(employeeIndex, 1, body);
+  // editEmployeeHandler(formPayload) {
+  //   fetch(`/api/v1/employees/${formPayload.id}`, {
+  //     method: "PATCH",
+  //     body: JSON.stringify(formPayload),
+  //     headers: {
+  //       Accept: "application/json",
+  //       "Content-Type": "application/json"
+  //     },
+  //     credentials: "same-origin"
+  //   })
+  //     .then(response => {
+  //       if (response.ok) {
+  //         return response;
+  //       } else {
+  //         let errorMessage = `${response.status} (${response.statusText})`,
+  //           error = new Error(errorMessage);
+  //         throw error;
+  //       }
+  //     })
+  //     .then(response => response.json())
+  //     .then(body => {
+  //       let findEmployee = employee => {
+  //         return employee.id === formPayload.id;
+  //       };
+  //       let employeeIndex = this.state.employees.findIndex(findEmployee);
+  //       let newEmployees = this.state.employees;
+  //       newEmployees.splice(employeeIndex, 1, body);
 
-        this.setState({ employees: newEmployees });
-      })
-      .catch(error => console.error(`Error in fetch: ${error.message}`));
-  }
+  //       this.setState({ employees: newEmployees });
+  //     })
+  //     .catch(error => console.error(`Error in fetch: ${error.message}`));
+  // }
 
    showFullEmployeeHandler(id) {
     if (id === this.state.employeeId) {

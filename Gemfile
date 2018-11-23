@@ -62,3 +62,5 @@ gem 'webpacker', '~> 3.3'
 gem 'bootstrap', '~> 4.1.3'
 gem "active_model_serializers"
 gem "httparty"
+gem 'graphql', '1.7.8'
+gem 'graphiql-rails', '1.4.8', group: :development
