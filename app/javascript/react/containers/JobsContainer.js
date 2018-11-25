@@ -8,6 +8,7 @@ import DayTabs from "../components/DayTabs"
 import styled from "styled-components"
 import BottomNav from '../components/BottomNav';
 import Grid from "@material-ui/core/Grid"
+import Nav from "../components/Nav"
 
 const Container = styled.div`
   border: 2px solid #d7d9dd;
@@ -177,6 +178,7 @@ export default class JobsContainer extends Component {
  
     return (
       <div>
+        <Nav />
         <DayTabs 
         // this is to pass the state to make a new job
           jobs={this.state.jobs}

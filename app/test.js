@@ -914,3 +914,33 @@ CenteredTabs.propTypes = {
 
 export default withStyles(styles)(CenteredTabs);
 
+
+
+<Query query={CUSTOMER_QUERY}>
+            {({ loading, error, data }) => {
+              if (loading) return <div>Fetching</div>;
+              if (error) return <div>Error</div>;
+
+              const customersToRender = data.allCustomers;
+            
+              return(
+                <div>
+                  {customersToRender.map((customer, index) => (
+                    <CustomerTile
+                      key={index}
+                      id={customer.id}
+                      firstName={customer.first_name}
+                      lastName={customer.last_name}
+                      phoneNumber={customer.phone_number}
+                      email={customer.email}
+                      address={customer.address}
+                      customerId={this.state.customerId}
+                      editCustomerHandler={this.editCustomerHandler}
+                      lat={+customer.lat}
+                      lng={+customer.lng}
+                    />
+                  ))}
+                </div>
+              )
+            }}
+          </Query>

@@ -7,6 +7,7 @@ import styled from "styled-components";
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
 import EmployeeFormDialog from "../components/EmployeeFormDialog";
+import Nav from "../components/Nav"
 
 
 const Container = styled.div`
@@ -195,6 +196,7 @@ export default class EmployeesContainer extends Component {
 
     return (
       <div>
+      <Nav />
         <BackButton />
         <Typography align="center" variant="h2" gutterBottom>
           Employees
